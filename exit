@@ -1,0 +1,17 @@
+[33mcommit fce7a04669c329e71f9fad2ab993049a96dd4422[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: badgerwannabe <badgerwannabe@gmail.com>
+Date:   Thu Aug 26 00:45:29 2021 +0200
+
+    updated sstructure, added routes to menu, fully functional trainer component (add/edit/delete)
+
+[33mcommit 38df2c7b3b0dbdc51e757548f1b5becfeab79a70[m
+Author: badgerwannabe <badgerwannabe@gmail.com>
+Date:   Thu Aug 19 18:53:35 2021 +0200
+
+    fixed Trainings query - added createdAt var, modified client to show trainers
+
+[33mcommit b9c2749ce4539a7e53631772f15c077710c26d45[m
+Author: badgerwannabe <badgerwannabe@gmail.com>
+Date:   Mon Aug 16 11:17:45 2021 +0200
+
+    working server prototype for spacefitness backend
