@@ -1,9 +1,11 @@
 const Admin = require("../../models/Admin");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { SECRET_KEY } = require("../../config");
+// const { SECRET_KEY } = require("../../config");
 const { UserInputError } = require("apollo-server");
 const { validateRegisterInput, validateLoginInput } = require("../../util/validators");
+
+const SECRET_KEY = process.env.SECRET_KEY
 
 function generateToken(user){
     return jwt.sign(
@@ -16,6 +18,7 @@ function generateToken(user){
         { expiresIn: "24h" }
       );
 }
+
 
 module.exports = {
   Mutation: {
