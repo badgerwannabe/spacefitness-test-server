@@ -9,7 +9,7 @@ const express = require("express");
 
 
 const PORT = process.env.PORT || 4000;
-
+const MONGODB = process.env.MONGODB
 
 const server = new ApolloServer({
     typeDefs,
@@ -19,7 +19,7 @@ const server = new ApolloServer({
 
 
 mongoose
-.connect(process.env.MONGODB, {useNewUrlParser: true}, { useUnifiedTopology: true })
+.connect(MONGODB, {useNewUrlParser: true}, { useUnifiedTopology: true })
 .then(()=>{
     console.log('MongoDB connected')
     return server.listen({port: PORT});
