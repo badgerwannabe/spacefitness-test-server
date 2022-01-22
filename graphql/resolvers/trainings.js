@@ -29,7 +29,7 @@ module.exports = {
   Mutation: {
     async createTraining(
       _,
-      { trainingName, trainingDescription, trainerId, image },
+      { trainingName, trainingDescription, trainerId, trainingImage },
       context
     ) {
       const trainer = await Trainer.findById(trainerId);
@@ -43,15 +43,15 @@ module.exports = {
       if (!trainerId) {
         throw new Error("Trainer must be chosen");
       }
-      if (image.trim() === "") {
+      if (trainingImage.trim() === "") {
         throw new Error("Enter image url");
       }
 
       const newTraining = new Training({
         trainingName,
         trainingDescription,
-        trainer: trainer.id,
-        trainerName: trainer.name,
+        trainingImage,
+        trainerId: trainer.id,
         createdAt: new Date().toISOString(),
       });
       console.log(newTraining);
@@ -69,7 +69,7 @@ module.exports = {
     },
     async editTraining(
       _,
-      { trainingId, trainingName, trainingDescription, trainer },
+      { trainingId, trainingName, trainingDescription, trainerId },
       context
     ) {
       const currentTraining = await Training.findById(trainingId);
@@ -80,10 +80,9 @@ module.exports = {
       if (trainingDescription) {
         currentTraining.trainingDescription = trainingDescription;
       }
-      if (trainer) {
-        const newTrainer = await Trainer.findById(trainer);
-        currentTraining.trainer = newTrainer.id;
-        currentTraining.trainerName = newTrainer.name;
+      if (trainerId) {
+        const newTrainer = await Trainer.findById(trainerId);
+        currentTraining.trainerId = newTrainer.id;
       }
 
       const updatedTraining = await currentTraining.save();
