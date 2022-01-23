@@ -14,6 +14,8 @@ const MONGODB = process.env.MONGODB
 const server = new ApolloServer({
     typeDefs,
     resolvers,
+     introspection: true,
+  playground: true,
     context: ({req}) => ({req})
 });
 
