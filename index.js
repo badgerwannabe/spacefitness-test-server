@@ -7,9 +7,9 @@ const resolvers = require('./graphql/resolvers/')
 
 const express = require("express");
 
-const {MONGODB} = require("./config.js")
-const PORT = process.env.PORT || 4000;
 
+const PORT = process.env.PORT || 4000;
+const MONGODB = process.env.MONGODB
 
 const server = new ApolloServer({
     typeDefs,

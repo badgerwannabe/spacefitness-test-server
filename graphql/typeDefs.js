@@ -25,17 +25,14 @@ module.exports = gql`
     id: ID!
     trainingName: String!
     trainingDescription: String!
-    trainerName: String
-    trainer: ID
+    trainerId: ID
     createdAt: String!
-    image: String!
+    trainingImage: String!
   }
   type dayTraining {
     id: ID!
     time: String
     training: ID!
-    trainer: ID!
-    createdAt: String!
   }
   type Day {
     id: ID!
@@ -51,7 +48,6 @@ module.exports = gql`
     getDays: [Day]
     getPersons: [Person]
   }
-
   type Admin {
     id: ID!
     email: String!
@@ -68,13 +64,12 @@ module.exports = gql`
   type Mutation {
     register(registerAdminInput: RegisterAdminInput): Admin!
     login(username: String!, password: String!): Admin!
-
     createTrainer(
       name: String!
       description: String!
       email: String!
       phoneNumber: String!
-      image: String!,
+      image: String!
     ): Trainer!
     deleteTrainer(trainerId: ID!): String!
     editTrainer(
@@ -89,15 +84,16 @@ module.exports = gql`
       trainingName: String!
       trainingDescription: String!
       trainerId: ID!
-      image: String!
+      trainingImage: String!
     ): Training!
     deleteTraining(trainingId: ID!): String!
     editTraining(
       trainingName: String
       trainingDescription: String
-      trainer: ID
+      trainerId: ID
       trainingId: ID!
       image: String
+      trainingImage: String
     ): Training!
     createDay(date: String!): Day!
     createPerson(
