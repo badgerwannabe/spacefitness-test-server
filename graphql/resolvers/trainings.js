@@ -6,7 +6,6 @@ module.exports = {
     async getTrainings() {
       try {
         const trainings = await Training.find();
-
         return trainings;
       } catch (err) {
         throw new Error(err);
@@ -15,7 +14,6 @@ module.exports = {
     async getTraining(_, { trainingId }, context) {
       try {
         const training = await Training.findById(trainingId);
-
         if (training) {
           return training;
         } else {
@@ -46,7 +44,7 @@ module.exports = {
       if (!trainerId) {
         throw new Error("Trainer must be chosen");
       }
-      if (image.trim() === "") {
+      if (trainingImage.trim() === "") {
         throw new Error("Enter image url");
       }
 
@@ -54,8 +52,8 @@ module.exports = {
       const newTraining = new Training({
         trainingName,
         trainingDescription,
-        trainer: trainer.id,
-        trainerName: trainer.name,
+        trainingImage,
+        trainerId: trainer.id,
         createdAt: new Date().toISOString(),
       });
       console.log(newTraining);
@@ -75,7 +73,13 @@ module.exports = {
     },
     async editTraining(
       _,
-      { trainingId, trainingName, trainingDescription, trainer },
+      {
+        trainingId,
+        trainingName,
+        trainingDescription,
+        trainerId,
+        trainingImage,
+      },
       context
     ) {
       const currentTraining = await Training.findById(trainingId);
@@ -86,10 +90,12 @@ module.exports = {
       if (trainingDescription) {
         currentTraining.trainingDescription = trainingDescription;
       }
-      if (trainer) {
-        const newTrainer = await Trainer.findById(trainer);
-        currentTraining.trainer = newTrainer.id;
-        currentTraining.trainerName = newTrainer.name;
+      if (trainerId) {
+        const newTrainer = await Trainer.findById(trainerId);
+        currentTraining.trainerId = newTrainer.id;
+      }
+      if (trainingImage) {
+        currentTraining.trainingImage = trainingImage;
       }
 
       const updatedTraining = await currentTraining.save();
