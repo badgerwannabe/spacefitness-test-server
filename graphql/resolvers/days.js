@@ -33,7 +33,7 @@ module.exports = {
       // console.log(copiedDay)
       const newDay = new Day({
         date: dayDate,
-        dayTrainings: dayTrainings,
+        dayTrainings: [dayTrainings],
         createdAt: new Date().toISOString(),
       });
       console.log(newDay);
