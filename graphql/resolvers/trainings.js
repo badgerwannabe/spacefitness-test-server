@@ -29,11 +29,14 @@ module.exports = {
   Mutation: {
     async createTraining(
       _,
+      //desctructure the vars
       { trainingName, trainingDescription, trainerId, image },
       context
     ) {
+      //find the trainer attached to the training
       const trainer = await Trainer.findById(trainerId);
 
+      //making sure input is not empty
       if (trainingName.trim() === "") {
         throw new Error("Training Name must not be empty");
       }
@@ -47,6 +50,7 @@ module.exports = {
         throw new Error("Enter image url");
       }
 
+      //new training constructor
       const newTraining = new Training({
         trainingName,
         trainingDescription,
@@ -55,7 +59,9 @@ module.exports = {
         createdAt: new Date().toISOString(),
       });
       console.log(newTraining);
+      //save training to database
       const training = await newTraining.save();
+      //return training to client
       return training;
     },
     async deleteTraining(_, { trainingId }, context) {

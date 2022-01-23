@@ -33,8 +33,6 @@ module.exports = gql`
     id: ID!
     time: String
     training: ID!
-    trainer: ID!
-    createdAt: String!
   }
   type Day {
     id: ID!
