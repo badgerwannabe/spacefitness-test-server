@@ -95,7 +95,10 @@ module.exports = gql`
       image: String
       trainingImage: String
     ): Training!
-    createDay(date: String!): Day!
+    createDay(date: String!, dayTrainings: [getDayTrainings]): Day!
+    deleteDay(id: ID!): String!
+    editDay(id: ID!, date: String, dayTrainings: [editDayTrainings]): Day!
+
     createPerson(
       firstName: String!
       lastName: String!
@@ -105,5 +108,16 @@ module.exports = gql`
       heardFrom: String!
       healthNotes: String
     ): Person!
+  }
+
+  input getDayTrainings {
+    time: String
+    training: ID!
+  }
+
+  input editDayTrainings {
+    dayTrainingId: ID!
+    time: String
+    training: ID
   }
 `;
