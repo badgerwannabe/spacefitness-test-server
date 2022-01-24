@@ -38,23 +38,26 @@ module.exports = {
         throw new Error(err);
       }
     },
-    async editDay(
-      _,
-      { dayId, date, dayTrainings: [...dayTrainings] },
-      context
-    ) {
+    async editDay(_, { id, date, dayTrainings: [...dayTrainings] }, context) {
       console.table(dayTrainings);
-      const currentDay = await Day.findById(dayId);
+      const currentDay = await Day.findById(id);
+      console.log(currentDay);
 
       if (date) {
         date = date;
       }
 
       if (dayTrainings) {
-        dayTrainings.forEach((el) => {
-          console.log(el);
-          currentDay.dayTrainings.push(el);
+        currentDay.dayTrainings.map((item) => {
+          console.log(item);
+          let item2 = dayTrainings.find((i2) => i2.id === item.id);
+          console.log(item2);
         });
+
+        // dayTrainings.forEach((el) => {
+        //   console.log(el);
+        //   currentDay.dayTrainings.push(el);
+        // });
       }
 
       const updatedDay = await currentDay.save();

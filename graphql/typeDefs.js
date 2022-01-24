@@ -96,8 +96,8 @@ module.exports = gql`
       trainingImage: String
     ): Training!
     createDay(date: String!, dayTrainings: [getDayTrainings]): Day!
-    deleteDay(dayId: ID!): String!
-    editDay(dayId: ID!, date: String, dayTrainings: [editDayTrainings]): Day!
+    deleteDay(id: ID!): String!
+    editDay(id: ID!, date: String, dayTrainings: [editDayTrainings]): Day!
 
     createPerson(
       firstName: String!
