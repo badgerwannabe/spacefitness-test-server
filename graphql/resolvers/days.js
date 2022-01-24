@@ -14,31 +14,52 @@ module.exports = {
   },
 
   Mutation: {
-    async createDay(_, { date, dayTrainings: [dayTrainings] }, context) {
-      //   const dayTrainings = [
-      //     {
-      //       time: "23:15:00",
-      //       training: "60e9e735461bf816848abedc",
-      //       trainer: "60d8b2ee22aeef2f84572285",
-      //     },
-      //     {
-      //       time: "18:00:00",
-      //       training: "60e9e7580a6b113b2486113a",
-      //       trainer: "60d8b1ff4ef7680174e9428b",
-      //     },
-      //   ];
-
+    async createDay(_, { date, dayTrainings: [...dayTrainings] }, context) {
+      // console.table(dayTrainings);
       //deep copy which disconnects
       // let copiedDay = JSON.parse(JSON.stringify(day));
       // console.log(copiedDay)
+
       const newDay = new Day({
-        date: dayDate,
-        dayTrainings: [dayTrainings],
+        date: date,
+        dayTrainings: [...dayTrainings],
         createdAt: new Date().toISOString(),
       });
-      console.log(newDay);
+      // console.log(newDay);
       const day = await newDay.save();
       return day;
+    },
+    async deleteDay(_, { dayId }, context) {
+      try {
+        const day = await Day.findById(dayId);
+        await day.delete();
+        return "Day deleted successfully";
+      } catch (err) {
+        throw new Error(err);
+      }
+    },
+    async editDay(
+      _,
+      { dayId, date, dayTrainings: [...dayTrainings] },
+      context
+    ) {
+      console.table(dayTrainings);
+      const currentDay = await Day.findById(dayId);
+
+      if (date) {
+        date = date;
+      }
+
+      if (dayTrainings) {
+        dayTrainings.forEach((el) => {
+          console.log(el);
+        });
+      } else {
+        console.log("can't");
+      }
+
+      const updatedDay = await currentDay.save();
+      return updatedDay;
     },
   },
 };
