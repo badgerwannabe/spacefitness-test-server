@@ -53,9 +53,8 @@ module.exports = {
       if (dayTrainings) {
         dayTrainings.forEach((el) => {
           console.log(el);
+          currentDay.dayTrainings.push(el);
         });
-      } else {
-        console.log("can't");
       }
 
       const updatedDay = await currentDay.save();
