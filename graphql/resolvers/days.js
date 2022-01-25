@@ -39,25 +39,54 @@ module.exports = {
       }
     },
     async editDay(_, { id, date, dayTrainings: [...dayTrainings] }, context) {
-      console.table(dayTrainings);
+      // console.table(dayTrainings);
       const currentDay = await Day.findById(id);
-      console.log(currentDay);
+      // console.log(currentDay);
 
       if (date) {
         date = date;
       }
 
       if (dayTrainings) {
-        currentDay.dayTrainings.map((item) => {
-          console.log(item);
-          let item2 = dayTrainings.find((i2) => i2.id === item.id);
-          console.log(item2);
-        });
+        //NEW TRY
 
-        // dayTrainings.forEach((el) => {
-        //   console.log(el);
-        //   currentDay.dayTrainings.push(el);
-        // });
+        const res = dayTrainings.reduce((acc, curr) => {
+          const stored = currentDay.dayTrainings.find(
+            ({ id }) => id === curr.dayTrainingId
+          );
+          // console.log(stored);
+
+          if (stored) {
+            stored.time = curr.time;
+            stored.training = curr.training;
+            acc.push(curr);
+          } else {
+            acc.push(curr);
+          }
+          return acc;
+        }, []);
+        console.log(res);
+
+        ///YET ANOTHER TRY
+
+        // function mergeArrayObjects(arr1, arr2) {
+        //loop through arr1
+        //loop through arr2
+        //if id is the same > update values
+        //make sure this obj is updated in arr1
+
+        //   let newArr = [...arr1];
+        //   newArr[0] = { ...newArr[0], ...arr2[0] };
+        //   newArr[1] = { ...newArr[1], ...arr2[1] };
+        //   console.log(newArr[0].time);
+        //   console.log(newArr[1].time);
+        //   return newArr;
+        // }
+        // let newTrainings = mergeArrayObjects(
+        //   currentDay.dayTrainings,
+        //   dayTrainings
+        // );
+        currentDay.dayTrainings = res;
       }
 
       const updatedDay = await currentDay.save();
