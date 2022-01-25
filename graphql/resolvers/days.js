@@ -11,6 +11,18 @@ module.exports = {
         throw new Error(err);
       }
     },
+    async getDay(_, { id }, context) {
+      try {
+        const day = await Day.findById(id);
+        if (day) {
+          return day;
+        } else {
+          throw new Error("Day not found");
+        }
+      } catch (err) {
+        throw new Error(err);
+      }
+    },
   },
 
   Mutation: {

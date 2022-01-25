@@ -46,6 +46,7 @@ module.exports = gql`
     getTrainings: [Training]
     getTraining(trainingId: ID!): Training
     getDays: [Day]
+    getDay(id: ID!): Day
     getPersons: [Person]
   }
   type Admin {
