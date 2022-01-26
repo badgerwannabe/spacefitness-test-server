@@ -28,7 +28,7 @@ module.exports = {
     async createTraining(
       _,
       //desctructure the vars
-      { trainingName, trainingDescription, trainerId, image },
+      { trainingName, trainingDescription, trainerId, trainingImage },
       context
     ) {
       //find the trainer attached to the training
