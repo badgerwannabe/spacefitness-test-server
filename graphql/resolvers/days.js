@@ -41,9 +41,9 @@ module.exports = {
       const day = await newDay.save();
       return day;
     },
-    async deleteDay(_, { dayId }, context) {
+    async deleteDay(_, { id }, context) {
       try {
-        const day = await Day.findById(dayId);
+        const day = await Day.findById(id);
         await day.delete();
         return "Day deleted successfully";
       } catch (err) {
