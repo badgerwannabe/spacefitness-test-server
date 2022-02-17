@@ -26,15 +26,15 @@ module.exports = {
   },
 
   Mutation: {
-    async createDay(_, { date, dayTrainings: [...dayTrainings] }, context) {
+    async createDay(_, { date, dayTrainings }, context) {
       // console.table(dayTrainings);
       //deep copy which disconnects
       // let copiedDay = JSON.parse(JSON.stringify(day));
       // console.log(copiedDay)
-
+  console.log(date+" "+dayTrainings)
       const newDay = new Day({
         date: date,
-        dayTrainings: [...dayTrainings],
+        dayTrainings: dayTrainings,
         createdAt: new Date().toISOString(),
       });
       // console.log(newDay);
